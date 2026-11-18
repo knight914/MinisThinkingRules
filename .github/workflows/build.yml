@@ -20,11 +20,12 @@ jobs:
             revision: 958fea4f779943505b15b93c88bb4db8d97b346d
             architecture: iphoneos-arm64e
     env:
-      THEOS: ${{ runner.temp }}/theos
       SCHEME: ${{ matrix.scheme }}
       EXPECTED_ARCH: ${{ matrix.architecture }}
     steps:
       - uses: actions/checkout@v4
+      - name: Set THEOS path
+        run: printf 'THEOS=%s/theos\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - name: Test native snapshot parser on macOS
         run: |
           xcrun --sdk macosx clang -fobjc-arc -framework Foundation -framework CoreFoundation Snapshot.m tests/SnapshotTests.m -I . -o "$RUNNER_TEMP/snapshot-tests"

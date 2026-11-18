@@ -1,6 +1,6 @@
 Package: com.knight914.ministhinkingrules
 Name: MinisThinkingRules
-Version: 0.0.1
+Version: 0.0.2
 Architecture: iphoneos-arm64e
 Description: Read-only snapshot viewer for Minis 1.14 thinking rules
 Maintainer: knight914

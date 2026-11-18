@@ -1,6 +1,6 @@
 # MinisThinkingRules
 
-Standalone Theos tweak, package `com.knight914.ministhinkingrules`, version `0.0.1`. Targets `com.aztut.app` with marketing version `1.14` or `1.14.0`, on iOS 16+ (arm64/arm64e), with a compatible tweak loader enabled for Minis. No installation or build has been performed.
+Standalone Theos tweak, package `com.knight914.ministhinkingrules`, version `0.0.2`. Targets `com.aztut.app` with marketing version `1.14` or `1.14.0`, on iOS 16+ (arm64/arm64e), with a compatible tweak loader enabled for Minis. No device installation has been performed.
 
 ## Use after a separately authorized installation
 
@@ -26,4 +26,4 @@ minis-config get thinkingrules | python3 tests/check_project.py --live
 
 The live check validates the contract without logging the snapshot; it does not execute Objective-C. `tests/SnapshotTests.m` runs the actual Foundation parser and renderer on macOS in CI (raw/enveloped JSON, ordering, empty, malformed, oversized). A future authorized device smoke test should verify launch/version gating, gesture open/close, valid/invalid/empty paste, repeat import, and foreground/multiwindow behavior. None of those UIKit cases have been device-tested.
 
-`.github/workflows/build.yml` defines a `macos-15` matrix for official Theos `rootless` (`iphoneos-arm64`) and official roothide Theos `roothide` (`iphoneos-arm64e`), with pinned toolchain and patched iPhoneOS 16.5 SDK revisions. Both target arm64/arm64e, run native parser tests, verify deb metadata and upload distinct artifacts. CI only triggers on `work/**` pushes. No GitHub repository was written, no Actions run exists and no deb is available. An actual authorized build must verify compiler/SDK compatibility and loader behavior; package schemes alone do not prove runtime support.
+`.github/workflows/build.yml` defines a `macos-15` matrix for official Theos `rootless` (`iphoneos-arm64`) and official roothide Theos `roothide` (`iphoneos-arm64e`), with pinned toolchain and patched iPhoneOS 16.5 SDK revisions. Both target arm64/arm64e, run native parser tests, verify deb metadata and upload distinct artifacts. CI only triggers on `work/**` pushes. See GitHub Actions for build status and artifacts. An actual authorized build must verify compiler/SDK compatibility and loader behavior; package schemes alone do not prove runtime support.
