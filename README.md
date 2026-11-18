@@ -1,6 +1,6 @@
 # MinisThinkingRules
 
-Standalone Theos tweak, package `com.knight914.ministhinkingrules`, version `0.0.2`. Targets `com.aztut.app` with marketing version `1.14` or `1.14.0`, on iOS 16+ (arm64/arm64e), with a compatible tweak loader enabled for Minis. No device installation has been performed.
+Standalone Theos tweak, package `com.knight914.ministhinkingrules`, version `0.0.3`. Targets only OpenMinis (`com.openminis.app`), exactly marketing version `1.15` and build `16`, on iOS 16+ (arm64/arm64e), with a compatible tweak loader enabled for Minis. No device installation has been performed.
 
 ## Use after a separately authorized installation
 
@@ -11,7 +11,7 @@ Standalone Theos tweak, package `com.knight914.ministhinkingrules`, version `0.0
 
 ## Source and limits
 
-OpenMinis tag [`1.14`](https://github.com/OpenMinis/OpenMinis/tree/1.14) resolves to `b4c0661d5631ebab4d1a2e6f3fd4c805d4030a6c`. The iOS `src/ios/Shared/Config/ConfigRegistry+Builtins.swift` registers the aggregate `thinkingrules` as a `ReadOnlyField`; it skips providers with neither custom nor applicable built-in rules. `src/ios/Shared/Config/Collections/ThinkingRulesCollection.swift` defines custom child paths, first-match ordering and built-in restrictions. The registry/store/cache are app-internal Swift implementation, not a verified callable plugin ABI. The presence of native source does not establish an external native entry point in the installed app.
+Official OpenMinis tag [`1.15`](https://github.com/OpenMinis/OpenMinis/tree/1.15) resolves to `6eda5523a9c14fa8edc4fd9fb72e643fe47f23be`. Its `src/ios/Shared/Config/ConfigRegistry+Builtins.swift` registers `thinkingrules` as a read-only JSON array. Each row has `provider`, `provider_id`, `custom`, and `builtin`; rules have `label` and `scope` plus optional metadata. Providers with no applicable rules are omitted. This source check describes the registry payload, not a native plugin ABI. The loader filter matches only the bundle ID; the runtime guard checks OS, exact marketing version (not `1.15.0`), and exact build before registering UI.
 
 The explicit paste fallback reads a user-supplied snapshot, not live state. No shell spawning from UIKit, private symbols/offsets, app database or container reads, network transport, automatic clipboard reads, disk persistence by the tweak, or config writes. Data is only held in the viewer while open; the system clipboard is separate and is not cleared. Copied data may contain provider identifiers and custom labels. The renderer does not resolve actual model matches or imply that a stale or filtered export reflects current settings.
 
@@ -20,6 +20,7 @@ The explicit paste fallback reads a user-supplied snapshot, not live state. No s
 Linux (Python 3 + PyYAML):
 
 ```sh
+python3 tests/check_target.py
 python3 tests/check_project.py
 minis-config get thinkingrules | python3 tests/check_project.py --live
 ```

@@ -8,7 +8,7 @@ import yaml
 
 root = pathlib.Path(__file__).resolve().parents[1]
 with (root / 'MinisThinkingRules.plist').open('rb') as handle:
-    assert plistlib.load(handle) == {'Filter': {'Bundles': ['com.aztut.app']}}
+    assert plistlib.load(handle) == {'Filter': {'Bundles': ['com.openminis.app']}}
 control = dict(line.split(': ', 1) for line in (root / 'control').read_text().splitlines())
 assert control['Package'] == 'com.knight914.ministhinkingrules'
 assert control['Name'] == 'MinisThinkingRules'

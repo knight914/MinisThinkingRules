@@ -85,10 +85,15 @@
 
 __attribute__((constructor)) static void MTRStart(void) {
     dispatch_async(dispatch_get_main_queue(), ^{
+        if (@available(iOS 16.0, *)) {
+            // Supported OS; continue with exact bundle metadata checks.
+        } else {
+            return;
+        }
         NSBundle *bundle = NSBundle.mainBundle;
-        if (![bundle.bundleIdentifier isEqualToString:@"com.aztut.app"]) return;
-        NSString *version = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        if (![version isEqualToString:@"1.14"] && ![version isEqualToString:@"1.14.0"]) return;
+        if (![bundle.bundleIdentifier isEqualToString:@"com.openminis.app"]) return;
+        if (![@"1.15" isEqual:[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]) return;
+        if (![@"16" isEqual:[bundle objectForInfoDictionaryKey:@"CFBundleVersion"]]) return;
         MTREntry *entry = [MTREntry new];
         NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
         [center addObserverForName:UIWindowDidBecomeKeyNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {

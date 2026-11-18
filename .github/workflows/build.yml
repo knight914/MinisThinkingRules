@@ -24,6 +24,8 @@ jobs:
       EXPECTED_ARCH: ${{ matrix.architecture }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check OpenMinis target
+        run: python3 tests/check_target.py
       - name: Set THEOS path
         run: printf 'THEOS=%s/theos\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - name: Test native snapshot parser on macOS
