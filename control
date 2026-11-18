@@ -1,0 +1,9 @@
+Package: com.knight914.ministhinkingrules
+Name: MinisThinkingRules
+Version: 0.0.1
+Architecture: iphoneos-arm64e
+Description: Read-only snapshot viewer for Minis 1.14 thinking rules
+Maintainer: knight914
+Author: knight914
+Section: Tweaks
+Depends: firmware (>= 16.0)
